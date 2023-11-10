@@ -1,5 +1,5 @@
 'use strict';
- 
+ //Questions & answers are placed in a variable as a array
 let quizData= [
     {
     question:"Which country drinks the most amount of coffee per person? ",
@@ -49,13 +49,19 @@ let quizData= [
     correctAnswer:"A",
 }];
 
+//set the variable to corresponding HTML element
+
 let questionsEl=document.querySelector("#questions");
-const answerA = document.querySelector("#answerA");
-const answerB = document.querySelector("#answerB");
-const answerC = document.querySelector("#answerC");
+let answerA = document.querySelector("#answerA");
+let answerB = document.querySelector("#answerB");
+let answerC = document.querySelector("#answerC");
 let resultEl=document.querySelector("#result");
+
+//Intialize currentquestion and score to 0
 let currentQuestion=0;
 let score = 0;
+
+//create a function to display questions and options
 
 function displayQuestion(){
     let data= quizData[currentQuestion];
@@ -64,6 +70,8 @@ function displayQuestion(){
     answerB.textContent = `B. ${data.Options.B}`;
     answerC.textContent = `C. ${data.Options.C}`;
 }
+
+//check answer in array and the user input is same
 
 function checkAnswer(selectedAnswer) {
     let data= quizData[currentQuestion];
@@ -74,14 +82,16 @@ function checkAnswer(selectedAnswer) {
     currentQuestion += 1;
 
     if(currentQuestion < quizData.length ){
+        //call the function if still the questions are available
         displayQuestion();
     }
     else{
+        //call the function if the user reaches the last question
         displayResult();
     }
 }
 
-
+//create a function to display the result
 function displayResult(){
     questionsEl.textContent = "Quiz completed!";
     answerA.style.display = "none";
@@ -95,6 +105,7 @@ function displayResult(){
 
 displayQuestion();
 
+//events 
 answerA.addEventListener("click", () => checkAnswer("A"));
 answerB.addEventListener("click", () => checkAnswer("B"));
 answerC.addEventListener("click", () => checkAnswer("C"));
